@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -19,15 +20,40 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en">
+      <body>
+        <nav className="sticky top-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur">
+          <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+            <Link href="/" className="text-xl font-bold">
+              MySite
+            </Link>
+
+            <div className="flex gap-6 text-sm font-medium">
+              <Link href="/" className="hover:text-blue-600">
+                Board
+              </Link>
+
+              <Link href="/notes/1" className="hover:text-blue-600">
+                Project Ideas
+              </Link>
+
+              <Link href="/notes/2" className="hover:text-blue-600">
+                To-Do
+              </Link>
+
+              <Link href="/notes/3" className="hover:text-blue-600">
+                Resources
+              </Link>
+            </div>
+          </div>
+        </nav>
+
+        {children}
+      </body>
     </html>
   );
 }
